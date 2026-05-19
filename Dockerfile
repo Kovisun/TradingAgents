@@ -18,7 +18,9 @@ COPY tradingagents/agents/utils/signal_data_tools.py /app/tradingagents/agents/u
 COPY tradingagents/agents/__init__.py /app/tradingagents/agents/__init__.py
 COPY tradingagents/agents/utils/agent_utils.py /app/tradingagents/agents/utils/agent_utils.py
 COPY tradingagents/graph/trading_graph.py /app/tradingagents/graph/trading_graph.py
+COPY tradingagents/agents/utils/a_stock_data_tools.py /app/tradingagents/agents/utils/a_stock_data_tools.py
 COPY tradingagents/graph/setup.py /app/tradingagents/graph/setup.py
+COPY tradingagents/agents/utils/a_stock_data_tools.py /app/tradingagents/agents/utils/a_stock_data_tools.py
 
 EXPOSE 8000
 CMD ["uv", "run", "--no-sync", "tradingagents-api"]

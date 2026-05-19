@@ -1,6 +1,12 @@
 from langchain_core.tools import tool
 from typing import Annotated
 from tradingagents.dataflows.interface import route_to_vendor
+from tradingagents.agents.utils.a_stock_data_tools import (
+    get_profit_forecast as _get_profit_forecast,
+    get_northbound_flow as _get_northbound_flow,
+    get_concept_blocks as _get_concept_blocks,
+    get_lockup_expiry as _get_lockup_expiry,
+)
 
 
 @tool
@@ -16,7 +22,7 @@ def get_profit_forecast(
     Returns:
         str: Consensus forecast report with valuation metrics
     """
-    return route_to_vendor("get_profit_forecast", ticker)
+    return _get_profit_forecast(ticker)
 
 
 @tool
@@ -54,7 +60,7 @@ def get_northbound_flow(
     Returns:
         str: Northbound capital flow report with bullish/bearish signal
     """
-    return route_to_vendor("get_northbound_flow", curr_date, include_history)
+    return _get_northbound_flow(curr_date, include_history)
 
 
 @tool
@@ -71,7 +77,7 @@ def get_concept_blocks(
     Returns:
         str: Concept and sector block membership with daily changes
     """
-    return route_to_vendor("get_concept_blocks", ticker)
+    return _get_concept_blocks(ticker)
 
 
 @tool
@@ -134,7 +140,7 @@ def get_lockup_expiry(
     Returns:
         str: Lockup expiry schedule with impact assessment
     """
-    return route_to_vendor("get_lockup_expiry", ticker, curr_date, forward_days)
+    return _get_lockup_expiry(ticker, curr_date, forward_days)
 
 
 @tool
