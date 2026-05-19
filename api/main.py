@@ -532,6 +532,9 @@ ANALYST_REPORT_MAP = {
     "macro": "macro_report",
     "smart_money": "smart_money_report",
     "volume_price": "volume_price_report",
+    "policy": "policy_report",
+    "hot_money": "hot_money_report",
+    "lockup": "lockup_report",
 }
 
 # All analysts always run — each uses its own natural time window
@@ -817,7 +820,7 @@ class UserRuntimeConfigResponse(BaseModel):
     server_fallback_enabled: bool = True
     email_report_enabled: bool = True
     wecom_report_enabled: bool = True
-    default_analysts: List[str] = Field(default_factory=lambda: ["market", "social", "news", "fundamentals", "macro", "smart_money", "volume_price"])
+    default_analysts: List[str] = Field(default_factory=lambda: ["market", "social", "news", "fundamentals", "macro", "smart_money", "volume_price", "policy", "hot_money", "lockup"])
 
 
 class UserRuntimeConfigUpdateRequest(BaseModel):
@@ -3637,7 +3640,7 @@ def _config_response_for_user(user: Optional[UserDB], db: Session) -> UserRuntim
         server_fallback_enabled=bool(cfg.get("server_fallback_enabled", True)),
         email_report_enabled=user.email_report_enabled if user and hasattr(user, 'email_report_enabled') else True,
         wecom_report_enabled=user.wecom_report_enabled if user and hasattr(user, "wecom_report_enabled") else True,
-        default_analysts=json.loads(user_cfg.default_analysts) if user_cfg and user_cfg.default_analysts else ["market", "social", "news", "fundamentals", "macro", "smart_money", "volume_price"],
+        default_analysts=json.loads(user_cfg.default_analysts) if user_cfg and user_cfg.default_analysts else ["market", "social", "news", "fundamentals", "macro", "smart_money", "volume_price", "policy", "hot_money", "lockup"],
     )
 
 
